@@ -1,0 +1,287 @@
+.entryPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    z-index: 1000;
+    overflow: hidden;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.entryPage.exiting {
+    transform: translateY(-100%);
+}
+
+/* Top Thoranam Overlay for Entry Page */
+.entryThoranamContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 100;
+    pointer-events: none;
+    /* Let clicks pass through to the doors */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+}
+
+.split {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: flex 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+}
+
+/* Sikku Kolam watermark container — sits behind all content */
+.kolamWatermark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.split:hover {
+    flex: 1.2;
+}
+
+/* Subtle shimmer overlay on hover */
+.split::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(242, 201, 76, 0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.split:hover::after {
+    opacity: 1;
+}
+
+.left {
+    background: linear-gradient(170deg, var(--maroon-rich) 0%, var(--maroon-deep) 60%);
+    border-right: 1px solid rgba(242, 201, 76, 0.15);
+}
+
+.right {
+    background: linear-gradient(190deg, var(--maroon-deep) 20%, var(--maroon-rich) 100%);
+    border-left: 1px solid rgba(242, 201, 76, 0.15);
+}
+
+.content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.sideLabel {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow-soft);
+    opacity: 0.7;
+    margin-bottom: 16px;
+}
+
+.character {
+    width: 220px;
+    height: 220px;
+    margin-bottom: 24px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.character img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+}
+
+.split:hover .character {
+    animation: floatExcited 1.5s ease-in-out infinite;
+}
+
+.name {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--yellow);
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    text-shadow: 0 2px 15px rgba(242, 201, 76, 0.3);
+}
+
+.clickHint {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow-soft);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s ease;
+    margin-top: 24px;
+}
+
+.split:hover .clickHint {
+    opacity: 0.7;
+    transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    pointer-events: none;
+}
+
+.dividerLine {
+    width: 1px;
+    flex: 1;
+    background: linear-gradient(to bottom, transparent, var(--yellow), transparent);
+    opacity: 0.35;
+}
+
+.dividerSymbol {
+    color: var(--yellow);
+    font-size: 1.4rem;
+    padding: 20px 0;
+    opacity: 0.7;
+    text-shadow: 0 0 20px rgba(242, 201, 76, 0.4);
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+/* Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes floatExcited {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1.05);
+    }
+
+    50% {
+        transform: translateY(-15px) scale(1.05);
+    }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px rgba(242, 201, 76, 0.3);
+    }
+
+    to {
+        text-shadow: 0 0 25px rgba(242, 201, 76, 0.7);
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .entryPage {
+        flex-direction: column;
+    }
+
+    .split {
+        width: 100%;
+        height: 50vh;
+        min-height: 50vh;
+        max-height: 50vh;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .split:hover {
+        flex: 1;
+    }
+
+    .divider {
+        left: 0;
+        right: 0;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+    }
+
+    .dividerLine {
+        height: 1px;
+        width: auto;
+        flex: 1;
+        background: linear-gradient(to right, transparent, var(--yellow), transparent);
+    }
+
+    .dividerSymbol {
+        padding: 0 16px;
+        font-size: 1.1rem;
+    }
+
+    .character {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 14px;
+    }
+
+    .name {
+        font-size: 2rem;
+    }
+
+    .sideLabel {
+        font-size: 0.65rem;
+        margin-bottom: 10px;
+    }
+
+    .clickHint {
+        opacity: 0.5;
+        transform: translateY(0);
+        font-size: 0.68rem;
+        margin-top: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .character {
+        width: 105px;
+        height: 105px;
+    }
+
+    .name {
+        font-size: 1.6rem;
+    }
+}

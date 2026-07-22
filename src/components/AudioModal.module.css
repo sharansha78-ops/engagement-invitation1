@@ -1,0 +1,284 @@
+.audioModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(ellipse at center, rgba(107, 29, 29, 0.95) 0%, rgba(45, 10, 10, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.6s ease;
+}
+
+/* Full-screen Kolam background layer — behind everything */
+.kolamBg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Push modal card and side panels above the kolam */
+.modalContent,
+.kuralSidePanel {
+    position: relative;
+    z-index: 1;
+}
+
+.modalContent {
+    text-align: center;
+    max-width: 460px;
+    padding: 60px 50px;
+    background: linear-gradient(145deg, rgba(139, 35, 35, 0.4) 0%, rgba(45, 10, 10, 0.6) 100%);
+    border: 1px solid rgba(242, 201, 76, 0.25);
+    border-radius: 16px;
+    position: relative;
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Decorative corners */
+.modalContent::before,
+.modalContent::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-color: var(--yellow);
+    border-style: solid;
+    opacity: 0.5;
+}
+
+.modalContent::before {
+    top: 12px;
+    left: 12px;
+    border-width: 2px 0 0 2px;
+}
+
+.modalContent::after {
+    bottom: 12px;
+    right: 12px;
+    border-width: 0 2px 2px 0;
+}
+
+.musicalNote {
+    font-size: 3.5rem;
+    color: var(--yellow);
+    margin-bottom: 20px;
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+.modalTitle {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--yellow);
+    margin-bottom: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.modalText {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--yellow-soft);
+    line-height: 1.7;
+    margin-bottom: 36px;
+}
+
+.enableButton {
+    background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-bright) 100%);
+    color: var(--maroon-deep);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 16px 48px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(242, 201, 76, 0.3);
+}
+
+.enableButton:hover {
+    box-shadow: 0 6px 30px rgba(242, 201, 76, 0.5);
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes glow {
+    from {
+        filter: drop-shadow(0 0 8px rgba(242, 201, 76, 0.3));
+    }
+
+    to {
+        filter: drop-shadow(0 0 20px rgba(242, 201, 76, 0.6));
+    }
+}
+
+/* ===== THIRUKKURAL FLOATING SIDE PANELS ===== */
+.kuralSidePanel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc((100vw - 520px) / 2 - 40px);
+    max-width: 300px;
+    text-align: center;
+    padding: 0 20px;
+    transition: opacity 0.6s ease;
+}
+
+.kuralLeft {
+    left: 0;
+    right: auto;
+}
+
+.kuralRight {
+    right: 0;
+    left: auto;
+}
+
+.kuralVisible {
+    opacity: 1;
+}
+
+.kuralHidden {
+    opacity: 0;
+}
+
+.kuralChapter {
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 1.1rem;
+    color: var(--yellow);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.kuralNumber {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    color: var(--yellow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 18px;
+}
+
+.kuralTamil {
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 1rem;
+    color: var(--yellow-soft);
+    line-height: 2;
+    white-space: pre-line;
+    margin-bottom: 16px;
+}
+
+.kuralDivider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(242, 201, 76, 0.4), transparent);
+    margin: 0 auto 16px;
+}
+
+.kuralMeaning {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255, 235, 180, 0.45);
+    font-style: italic;
+    line-height: 1.7;
+}
+
+/* ===== MOBILE THIRUKKURAL (inside modal) ===== */
+.kuralMobile {
+    display: none;
+    /* hidden on desktop */
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(242, 201, 76, 0.2);
+    transition: opacity 0.6s ease;
+}
+
+.kuralTamilMobile {
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 0.95rem;
+    color: var(--yellow-soft);
+    line-height: 1.8;
+    white-space: pre-line;
+    margin-bottom: 12px;
+}
+
+.kuralDividerMobile {
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(242, 201, 76, 0.4), transparent);
+    margin: 0 auto 12px;
+}
+
+.kuralMeaningMobile {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255, 235, 180, 0.45);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+    .kuralSidePanel {
+        display: none;
+    }
+
+    .kuralMobile {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .modalContent {
+        padding: 40px 24px;
+        max-width: 90%;
+        margin: 0 16px;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .modalTitle {
+        font-size: 2rem;
+    }
+
+    .musicalNote {
+        margin-bottom: 12px;
+        font-size: 2.8rem;
+    }
+
+    .modalText {
+        margin-bottom: 24px;
+    }
+}

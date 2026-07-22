@@ -1,0 +1,67 @@
+.footer {
+    background: linear-gradient(180deg, var(--maroon-deep) 0%, #1A0505 100%);
+    border-top: 1px solid rgba(242, 201, 76, 0.15);
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+}
+
+/* Top decorative line */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+}
+
+.hashtag {
+    font-family: var(--font-script);
+    font-size: 2.2rem;
+    color: var(--yellow);
+    margin-bottom: 12px;
+    text-shadow: 0 2px 15px rgba(242, 201, 76, 0.2);
+}
+
+.aayiramKaalam {
+    margin-bottom: 28px;
+}
+
+.aayiramTamil {
+    font-family: 'Noto Serif Tamil', serif;
+    font-size: 1.5rem;
+    color: var(--yellow);
+    margin-bottom: 8px;
+    opacity: 0.85;
+    text-shadow: 0 2px 20px rgba(242, 201, 76, 0.25);
+}
+
+.aayiramMeaning {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--yellow-soft);
+    letter-spacing: 1.5px;
+    opacity: 0.4;
+    font-style: italic;
+}
+
+.copyright {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--yellow-soft);
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 20px;
+    }
+
+    .hashtag {
+        font-size: 1.8rem;
+    }
+}
